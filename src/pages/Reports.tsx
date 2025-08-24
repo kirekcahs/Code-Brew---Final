@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// Replace your entire Reports.tsx with this enhanced version:
-
 import React, { useState, useEffect } from 'react';
 import { 
   BarChart3, 
@@ -757,7 +755,7 @@ const ReportsManagement: React.FC = () => {
             </div>
           </div>
 
-          {/* ✅ NEW: Interactive Chart Section */}
+          {/*  Interactive Chart Section */}
           <div className="bg-[#FFFBF5] backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-[#D6C7B7]">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-lg font-semibold text-[#3D2C1D] flex items-center">

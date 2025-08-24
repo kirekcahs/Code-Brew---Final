@@ -243,7 +243,7 @@ const ReportsManagement: React.FC = () => {
     });
   };
 
-  // ✅ NEW: Chart data preparation functions
+  //  Chart data preparation functions
   const getSalesChartData = () => {
     if (chartType === 'pie' || chartType === 'doughnut') {
       // Branch-wise sales for pie/doughnut chart

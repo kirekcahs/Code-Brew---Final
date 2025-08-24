@@ -13,7 +13,7 @@ const LandingPage: React.FC = () => {
 
   // Add this helper function at the top
 
-  // ✅ UPDATED LOGIN FUNCTION - Admin goes to branch management first
+ 
   const handleLogin = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     setIsLoading(true);
@@ -35,13 +35,13 @@ const LandingPage: React.FC = () => {
       console.log('Login response:', data);
 
       if (response.ok) {
-        // ✅ FIXED: Handle the new response structure
+        //  Handle the new response structure
         localStorage.setItem('accessToken', data.accessToken);
         localStorage.setItem('refreshToken', data.refreshToken);
         localStorage.setItem('user', JSON.stringify(data.user));
         localStorage.setItem('userRole', data.user.role_name);
         
-        // ✅ FIXED: Set selectedBranch to user's assigned branch
+        //  Set selectedBranch to user's assigned branch
         if (data.user.branch_id) {
           localStorage.setItem('selectedBranch', data.user.branch_id.toString());
           console.log('✅ Set selectedBranch to user assigned branch:', data.user.branch_name, '(ID:', data.user.branch_id, ')');
@@ -50,7 +50,7 @@ const LandingPage: React.FC = () => {
         console.log('User role:', data.user.role_name);
         console.log('User branch:', data.user.branch_name);
 
-        // ✅ UPDATED: Navigate based on user role - Admin goes to branch management FIRST
+        //  Navigate based on user role - Admin goes to branch management FIRST
         switch (data.user.role_name) {
           case 'Admin':
             console.log('Admin login - redirecting to branch management');

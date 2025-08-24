@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// Create a new file: src/components/BranchIndicator.tsx
+
 
 import React, { useState, useEffect } from 'react';
 import { Building2, MapPin, User } from 'lucide-react';
@@ -19,14 +18,12 @@ const BranchIndicator: React.FC = () => {
     // Initial load
     updateUserData();
 
-    // ✅ Listen for localStorage changes (when branch selection changes)
     const handleStorageChange = () => {
       updateUserData();
     };
 
     window.addEventListener('storage', handleStorageChange);
     
-    // ✅ Custom event for same-window updates
     window.addEventListener('userDataUpdate', handleStorageChange);
 
     return () => {
@@ -37,7 +34,6 @@ const BranchIndicator: React.FC = () => {
 
   if (!userData) return null;
 
-  // ✅ FIXED: Show selected branch for Admin, assigned branch for others
   const displayBranchName = userData.role_name === 'Admin' 
     ? (userData.selected_branch_name || 'No Branch Selected')
     : (userData.branch_name || 'Unknown Branch');

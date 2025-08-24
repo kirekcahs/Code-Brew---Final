@@ -193,7 +193,7 @@ const AssetManagement: React.FC = () => {
       <div className="h-full overflow-y-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
           
-          {/* ✅ ADD: Branch Indicator */}
+          {/*  Branch Indicator */}
           <BranchIndicator />
           
           {/* Header */}
@@ -262,13 +262,13 @@ const AssetManagement: React.FC = () => {
             </div>
           </div>
 
-          {/* ✅ UPDATED: Assets Table without fixed height */}
+          {/*  Assets Table without fixed height */}
           <div className="bg-[#FFFBF5] backdrop-blur-sm rounded-2xl shadow-lg border border-[#D6C7B7]">
             <div className="px-6 py-4 border-b border-[#D6C7B7]">
               <h3 className="text-lg font-semibold text-[#3D2C1D]">Assets ({filteredAssets.length})</h3>
             </div>
             
-            {/* ✅ REMOVED: Fixed height, now flows naturally */}
+            {/* Fixed height, now flows naturally */}
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-[#EAE1D5]">

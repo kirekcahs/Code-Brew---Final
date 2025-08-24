@@ -72,13 +72,13 @@ const Dashboard: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // ✅ FIXED: Better branch ID handling for Admin users
+  //  Better branch ID handling for Admin users
   useEffect(() => {
     const fetchBranchData = () => {
       const userData = JSON.parse(localStorage.getItem('user') || '{}');
       let branchId = localStorage.getItem('selectedBranch');
       
-      // ✅ FIXED: Handle Admin vs other roles differently
+      //  Handle Admin vs other roles differently
       if (userData.role_name === 'Admin') {
         // Admin: Use selected branch
         if (!branchId || branchId === 'null' || branchId === 'undefined') {
@@ -109,7 +109,7 @@ const Dashboard: React.FC = () => {
       const userData = JSON.parse(localStorage.getItem('user') || '{}');
       let branchId = localStorage.getItem('selectedBranch');
       
-      // ✅ IMPROVED: Better validation for branch ID
+      //  Better validation for branch ID
       if (!branchId || branchId === 'null' || branchId === 'undefined') {
         if (userData.role_name === 'Admin') {
           console.log('⚠️ Admin needs to select a branch first');
@@ -142,7 +142,7 @@ const Dashboard: React.FC = () => {
         const statsData = await statsRes.json();
         setStats(statsData);
       } else {
-        // ✅ FALLBACK: Use mock data if endpoints not ready
+        //  Use mock data if endpoints not ready
         setStats({
           totalSales: 125000,
           totalOrders: 45,
@@ -159,7 +159,7 @@ const Dashboard: React.FC = () => {
         const ordersData = await ordersRes.json();
         setRecentOrders(ordersData);
       } else {
-        // ✅ FALLBACK: Mock recent orders
+        //  Mock recent orders
         setRecentOrders([
           {
             order_id: 'ORD-001',
@@ -186,7 +186,7 @@ const Dashboard: React.FC = () => {
         const inventoryData = await inventoryRes.json();
         setLowStockItems(inventoryData);
       } else {
-        // ✅ FALLBACK: Mock low stock items
+        // Mock low stock items
         setLowStockItems([
           {
             product_id: '1',
@@ -211,7 +211,7 @@ const Dashboard: React.FC = () => {
         const productsData = await productsRes.json();
         setTopProducts(productsData);
       } else {
-        // ✅ FALLBACK: Mock top products
+        // Mock top products
         setTopProducts([
           {
             product_name: 'Hot Latte',
@@ -284,7 +284,7 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  // ✅ ADD: Show branch selection prompt for Admin without selected branch
+  // : Show branch selection prompt for Admin without selected branch
   if (isLoading) {
     return (
       <div className="h-screen bg-[#F5F0E6] flex items-center justify-center">
@@ -296,7 +296,7 @@ const Dashboard: React.FC = () => {
     );
   }
 
-  // ✅ ADD: Check if Admin needs to select branch
+  // Check if Admin needs to select branch
   const userData = JSON.parse(localStorage.getItem('user') || '{}');
   const selectedBranchId = localStorage.getItem('selectedBranch');
 
@@ -330,7 +330,7 @@ const Dashboard: React.FC = () => {
     <div className="h-screen bg-[#F5F0E6] overflow-hidden">
       <div className="h-full overflow-y-auto">
         <div className="p-6 space-y-6">
-          {/* ✅ ADD: Branch Indicator */}
+          {/*  Branch Indicator */}
           <BranchIndicator />
           
           {/* Header */}
@@ -434,7 +434,7 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
 
-          {/* ✅ UPDATED: Recent Orders and Low Stock - Remove fixed heights */}
+          {/*  Recent Orders and Low Stock - Remove fixed heights */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Recent Orders */}
             <div className="bg-[#FFFBF5] rounded-2xl shadow-lg border border-[#D6C7B7] overflow-hidden">
@@ -452,7 +452,7 @@ const Dashboard: React.FC = () => {
                   </button>
                 </div>
               </div>
-              {/* ✅ REMOVED: Fixed height, flows naturally */}
+              {/* : Fixed height, flows naturally */}
               <div>
                 {recentOrders.length === 0 ? (
                   <div className="p-6 text-center text-[#6F4E37]">
@@ -497,7 +497,7 @@ const Dashboard: React.FC = () => {
                   Low Stock Alerts
                 </h3>
               </div>
-              {/* ✅ REMOVED: Fixed height, flows naturally */}
+              {/*  Fixed height, flows naturally */}
               <div>
                 {lowStockItems.length === 0 ? (
                   <div className="p-6 text-center text-[#6F4E37]">
@@ -548,7 +548,7 @@ const Dashboard: React.FC = () => {
                 Top Selling Products
               </h3>
             </div>
-            {/* ✅ REMOVED: Fixed height, flows naturally */}
+            {/* Fixed height, flows naturally */}
             <div className="p-6">
               {topProducts.length === 0 ? (
                 <div className="text-center text-[#6F4E37] py-8">

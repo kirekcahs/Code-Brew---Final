@@ -15,7 +15,7 @@ interface Branch {
 }
 
 interface Role {
-  role_id: number; // ✅ Backend returns number, not string
+  role_id: number; 
   role_name: string;
 }
 
@@ -42,7 +42,7 @@ interface NewUser {
 interface NewBranch {
   branch_name: string;
   location_address: string;
-  contact_number: string;    // We'll map this to contact_details
+  contact_number: string;   
   manager_name: string;
 }
 
@@ -84,7 +84,6 @@ const BranchManagement: React.FC = () => {
     password: '' // Optional - for password changes
   });
 
-  // ✅ FIXED: Handle different response structures from your backend
   const fetchBranches = async () => {
     try {
       const token = localStorage.getItem('accessToken');
@@ -100,7 +99,6 @@ const BranchManagement: React.FC = () => {
         const data = await response.json();
         console.log('Backend response:', data); // Debug log
         
-        // ✅ Handle your backend's actual response structure
         if (Array.isArray(data)) {
           // Direct array response
           setBranches(data);
@@ -143,7 +141,7 @@ const BranchManagement: React.FC = () => {
         const data = await response.json();
         console.log('Users response:', data); // Debug log
         
-        // ✅ Handle different response structures
+        // Handle different response structures
         if (Array.isArray(data)) {
           setUsers(data);
         } else if (data.users) {
@@ -177,7 +175,7 @@ const BranchManagement: React.FC = () => {
         const data = await response.json();
         console.log('Roles response:', data); // Debug log
         
-        // ✅ Handle different response structures
+        //  Handle different response structures
         if (Array.isArray(data)) {
           setRoles(data);
         } else if (data.roles) {
@@ -206,7 +204,7 @@ const BranchManagement: React.FC = () => {
     try {
       const token = localStorage.getItem('accessToken');
       
-      // ✅ Map to backend field names
+      //  Map to backend field names
       const branchData = {
         branch_name: newBranch.branch_name,
         location_address: newBranch.location_address,
@@ -269,7 +267,7 @@ const BranchManagement: React.FC = () => {
     try {
       const token = localStorage.getItem('accessToken');
       
-      // ✅ FIXED: Ensure proper data types and validation
+      // Ensure proper data types and validation
       const userData = {
         username: newUser.username.trim(),
         password: newUser.password,
@@ -295,7 +293,7 @@ const BranchManagement: React.FC = () => {
       
       if (response.ok) {
         const data = await response.json();
-        console.log('✅ User created successfully:', data);
+        console.log(' User created successfully:', data);
         toast.success('User created successfully');
         
         // Reset form
@@ -306,12 +304,12 @@ const BranchManagement: React.FC = () => {
           role_id: ''
         });
         
-        // ✅ FIXED: Force refresh users list
+        //  Force refresh users list
         await fetchUsers(selectedBranch);
       } else {
-        // ✅ IMPROVED: Better error handling
+        //  Better error handling
         const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
-        console.error('❌ Create user error:', errorData);
+        console.error('Create user error:', errorData);
         
         if (errorData.errors && Array.isArray(errorData.errors)) {
           const errorMessages = errorData.errors.map((err: { msg: any; message: any; }) => err.msg || err.message).join(', ');
@@ -321,7 +319,7 @@ const BranchManagement: React.FC = () => {
         }
       }
     } catch (error) {
-      console.error('❌ Network error creating user:', error);
+      console.error(' Network error creating user:', error);
       toast.error('Network error creating user');
     }
   };
@@ -336,11 +334,11 @@ const BranchManagement: React.FC = () => {
     try {
       const token = localStorage.getItem('accessToken');
       
-      // ✅ FIXED: Use correct field names that match your backend
+      //  FIXED: Use correct field names that match your backend
       const branchData = {
         branch_name: newBranch.branch_name,
-        location_address: newBranch.location_address, // ✅ Fixed
-        contact_details: newBranch.contact_number,    // ✅ Fixed
+        location_address: newBranch.location_address, 
+        contact_details: newBranch.contact_number,    
         manager_name: newBranch.manager_name,
         is_active: true // Add this if required
       };
@@ -422,7 +420,7 @@ const BranchManagement: React.FC = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log('✅ User updated successfully:', data);
+        console.log(' User updated successfully:', data);
         toast.success('User updated successfully');
         
         // Close modal and refresh users
@@ -432,16 +430,16 @@ const BranchManagement: React.FC = () => {
         fetchUsers(selectedBranch);
       } else {
         const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
-        console.error('❌ Update user error:', errorData);
+        console.error(' Update user error:', errorData);
         toast.error(errorData.message || 'Failed to update user');
       }
     } catch (error) {
-      console.error('❌ Network error updating user:', error);
+      console.error(' Network error updating user:', error);
       toast.error('Network error updating user');
     }
   };
 
-  // Handle input changes
+ 
   const handleBranchInputChange = (field: keyof NewBranch, value: string) => {
     setNewBranch(prev => ({
       ...prev,
@@ -491,12 +489,12 @@ const BranchManagement: React.FC = () => {
     setShowEditUserModal(true);
   };
 
-  // ✅ IMPROVED: Branch selection with navigation guidance
+  //  Branch selection with navigation guidance
   const handleBranchSelection = (branchId: number) => {
     setSelectedBranch(branchId.toString());
     localStorage.setItem('selectedBranch', branchId.toString());
     
-    // ✅ FIXED: Update user data with selected branch information
+    // Update user data with selected branch information
     const selectedBranchData = branches.find(b => b.branch_id === branchId);
     if (selectedBranchData) {
       const userData = JSON.parse(localStorage.getItem('user') || '{}');
@@ -508,12 +506,12 @@ const BranchManagement: React.FC = () => {
       };
       localStorage.setItem('user', JSON.stringify(updatedUserData));
       
-      // ✅ Force update components that depend on user data
+      //  Force update components that depend on user data
       window.dispatchEvent(new Event('storage'));
     }
     
     setShowBranchSelectModal(false);
-    toast.success(`✅ Selected ${selectedBranchData?.branch_name} - Now you can access Dashboard, Inventory, Assets & Reports`);
+    toast.success(`Selected ${selectedBranchData?.branch_name} - Now you can access Dashboard, Inventory, Assets & Reports`);
   };
 
   // Toggle user active status
@@ -631,7 +629,7 @@ const BranchManagement: React.FC = () => {
     }
   }, [selectedBranch]);
 
-  // ✅ FIXED: Update branches state and preserve selection
+  // Update branches state and preserve selection
   useEffect(() => {
     if (branches.length > 0 && selectedBranch) {
       // Ensure the selected branch data is updated in localStorage
@@ -1156,7 +1154,7 @@ const BranchManagement: React.FC = () => {
                 className="w-full border border-gray-300 rounded-md p-3"
               />
               <div className="text-sm text-gray-600">
-                💡 Leave password empty if you don't want to change it
+                 Leave password empty if you don't want to change it
               </div>
             </div>
 

@@ -74,13 +74,13 @@ const InventoryManagement: React.FC = () => {
     max_stock: 0
   });
 
-  // ✅ ADD: Check for branch selection
+  //  Check for branch selection
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem('user') || '{}');
     const selectedBranchId = localStorage.getItem('selectedBranch');
     
     if (userData.role_name === 'Admin' && (!selectedBranchId || selectedBranchId === 'null')) {
-      console.log('⚠️ Admin needs to select a branch first');
+      console.log('Admin needs to select a branch first');
       return;
     }
     
@@ -91,7 +91,7 @@ const InventoryManagement: React.FC = () => {
     fetchInventory();
   }, [selectedBranch, selectedCategory]);
 
-  // ✅ Debug logging for inventory state changes
+  //  Debug logging for inventory state changes
   useEffect(() => {
     console.log('🟡 Inventory state updated:', inventory.length, 'items');
     if (inventory.length > 0) {
@@ -186,7 +186,7 @@ const InventoryManagement: React.FC = () => {
      item.sku?.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
-  // ✅ Debug filtered inventory
+  // Debug filtered inventory
   useEffect(() => {
     console.log('🟡 Filtered inventory updated:', filteredInventory.length, 'items');
   }, [filteredInventory]);
@@ -346,7 +346,7 @@ const InventoryManagement: React.FC = () => {
     window.URL.revokeObjectURL(url);
   };
 
-  // ✅ ADD: Early return if no branch selected
+  //  Early return if no branch selected
   const userData = JSON.parse(localStorage.getItem('user') || '{}');
   const selectedBranchId = localStorage.getItem('selectedBranch');
 
@@ -508,7 +508,7 @@ const InventoryManagement: React.FC = () => {
             </div>
           </div>
 
-          {/* ✅ UPDATED: Regular table without fixed height */}
+          {/*  Regular table without fixed height */}
           <div className="bg-[#FFFBF5] backdrop-blur-sm rounded-2xl shadow-lg border border-[#D6C7B7]">
             <div className="px-6 py-4 border-b border-[#D6C7B7] flex justify-between items-center">
               <div>

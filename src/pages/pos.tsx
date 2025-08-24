@@ -83,7 +83,7 @@ const Pos: React.FC = () => {
         console.log('🔵 POS initialized for user:', user.username);
         console.log('🔵 User assigned branch:', user.branch_name, '(ID:', user.branch_id, ')');
         
-        // ✅ FIXED: Set selectedBranch to user's assigned branch
+        //  Set selectedBranch to user's assigned branch
         if (user.branch_id) {
           localStorage.setItem('selectedBranch', user.branch_id.toString());
           console.log('✅ Set selectedBranch to user assigned branch:', user.branch_id);
@@ -167,7 +167,7 @@ const Pos: React.FC = () => {
   const tax = useMemo(() => subtotal * taxRate, [subtotal, taxRate]);
   const total = useMemo(() => subtotal + tax - discount, [subtotal, tax, discount]);
 
-  // ✅ FIXED: Helper functions for proper calculations
+  //  Helper functions for proper calculations
   const getSubtotal = () => subtotal;
   const getTax = () => tax;
   const getTotalWithTax = () => total;
@@ -220,7 +220,7 @@ const Pos: React.FC = () => {
     }
   };
 
-  // ✅ FIXED: Single payment handler with proper error handling
+  //  Single payment handler with proper error handling
   const handlePayment = async () => {
     if (cart.length === 0) return;
     
@@ -261,7 +261,7 @@ const Pos: React.FC = () => {
       if (response.ok) {
         const result = await response.json();
         
-        // ✅ SUCCESS: Create proper receipt
+        // Create proper receipt
         const newSale: Sale = {
           id: result.order?.order_id?.toString() || Date.now().toString(),
           date: new Date().toLocaleString(),
@@ -276,18 +276,18 @@ const Pos: React.FC = () => {
         setLatestReceipt(newSale);
         setSalesHistory(prev => [...prev, newSale]);
         
-        // ✅ Clear cart and close payment modal
+        // Clear cart and close payment modal
         setCart([]);
         setDiscount(0);
         setShowPaymentModal(false);
         setShowReceiptModal(true);
         
-        alert('✅ Sale completed! Inventory automatically updated.');
+        alert('Sale completed! Inventory automatically updated.');
         
       } else {
         const error = await response.json();
         
-        // ✅ HANDLE INVENTORY ERRORS
+        //  HANDLE INVENTORY ERRORS
         if (error.message?.includes('Insufficient stock')) {
           alert(`❌ ${error.message}\n\nPlease check inventory levels or reduce quantities.`);
         } else if (error.message?.includes('No inventory record')) {
@@ -392,7 +392,7 @@ const Pos: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#F5F0E6]">
-      {/* ✅ Header */}
+      {/*  Header */}
       <div className="bg-[#3D2C1D] text-white px-6 py-4 shadow-lg">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-4">
@@ -432,7 +432,7 @@ const Pos: React.FC = () => {
         </div>
       </div>
 
-      {/* ✅ Main Content */}
+      {/*  Main Content */}
       <div className="p-6">
         <div className="flex space-x-6 h-[calc(100vh-120px)]">
           {/* Left Side - Products */}
@@ -612,7 +612,7 @@ const Pos: React.FC = () => {
         </div>
       </div>
 
-      {/* ✅ Product Modal */}
+      {/*  Product Modal */}
       {showProductModal && selectedProduct && (
         <div className="fixed inset-0 bg-[#3D2C1D] bg-opacity-70 flex justify-center items-center z-50">
           <div className="bg-[#FFFBF5] p-6 rounded-lg shadow-xl w-full max-w-lg animate-fadeIn relative">
@@ -672,7 +672,7 @@ const Pos: React.FC = () => {
         </div>
       )}
 
-      {/* ✅ Payment Modal */}
+      {/*  Payment Modal */}
       {showPaymentModal && (
         <div className="fixed inset-0 bg-[#3D2C1D] bg-opacity-70 flex justify-center items-center z-50">
           <div className="bg-[#FFFBF5] p-8 rounded-lg shadow-xl w-full max-w-md animate-fadeIn">
@@ -723,7 +723,7 @@ const Pos: React.FC = () => {
         </div>
       )}
 
-      {/* ✅ Receipt Modal */}
+      {/*  Receipt Modal */}
       {showReceiptModal && latestReceipt && (
         <div className="fixed inset-0 bg-[#3D2C1D] bg-opacity-70 flex justify-center items-center z-50">
           <div className="bg-[#FFFBF5] p-8 rounded-lg shadow-xl w-full max-w-sm animate-fadeIn">
@@ -780,7 +780,7 @@ const Pos: React.FC = () => {
         </div>
       )}
 
-      {/* ✅ Sales Report Modal */}
+      {/*  Sales Report Modal */}
       {showSalesReportModal && (
         <div className="fixed inset-0 bg-[#3D2C1D] bg-opacity-70 flex justify-center items-center z-50">
           <div className="bg-[#FFFBF5] p-8 rounded-lg shadow-xl w-full max-w-2xl animate-fadeIn flex flex-col h-[80vh]">
